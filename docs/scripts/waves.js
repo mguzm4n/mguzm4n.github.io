@@ -1,51 +1,43 @@
 const cvs = document.getElementById('waves');
-const myBlur = document.getElementById('blur-effect'); 
+// const myBlur = document.getElementById('blur-effect'); 
 
+// function animateBlur(timestamp) {
+//   if (!startTime) startTime = timestamp;
+//   const elapsed = timestamp - startTime;
+//   const progress = Math.min(elapsed / duration, 1);
 
-let animationFrameId = null;
-const duration = 2000; // Animation duration in milliseconds
-const maxBlur = 6; // The maximum stdDeviation value
-let startValue = 0;
-let endValue = 0;
-let startTime = null;
+//   const currentValue = startValue + (endValue - startValue) * progress;
+//   myBlur.setAttribute('stdDeviation', currentValue);
 
-function animateBlur(timestamp) {
-  if (!startTime) startTime = timestamp;
-  const elapsed = timestamp - startTime;
-  const progress = Math.min(elapsed / duration, 1);
+//   cvs.style.filter = 'none'; // Temporarily remove
+//   cvs.style.filter = 'url(#gaussian)'; // Re-apply
 
-  const currentValue = startValue + (endValue - startValue) * progress;
-  myBlur.setAttribute('stdDeviation', currentValue);
+//   if (progress < 1) {
+//     animationFrameId = requestAnimationFrame(animateBlur);
+//   } else {
+//     animationFrameId = null;
+//   }
+// }
 
-  cvs.style.filter = 'none'; // Temporarily remove
-  cvs.style.filter = 'url(#gaussian)'; // Re-apply
+// cvs.addEventListener('mouseenter', () => {
+//   if (animationFrameId) {
+//     cancelAnimationFrame(animationFrameId);
+//   }
+//   startTime = null;
+//   startValue = parseFloat(myBlur.getAttribute('stdDeviation')) || 0; // Get current blur level
+//   endValue = maxBlur;
+//   animationFrameId = requestAnimationFrame(animateBlur);
+// });
 
-  if (progress < 1) {
-    animationFrameId = requestAnimationFrame(animateBlur);
-  } else {
-    animationFrameId = null;
-  }
-}
-
-cvs.addEventListener('mouseenter', () => {
-  if (animationFrameId) {
-    cancelAnimationFrame(animationFrameId);
-  }
-  startTime = null;
-  startValue = parseFloat(myBlur.getAttribute('stdDeviation')) || 0; // Get current blur level
-  endValue = maxBlur;
-  animationFrameId = requestAnimationFrame(animateBlur);
-});
-
-cvs.addEventListener('mouseleave', () => {
-  if (animationFrameId) {
-    cancelAnimationFrame(animationFrameId);
-  }
-  startTime = null;
-  startValue = parseFloat(myBlur.getAttribute('stdDeviation')) || 0; // Get current blur level
-  endValue = 0;
-  animationFrameId = requestAnimationFrame(animateBlur);
-});
+// cvs.addEventListener('mouseleave', () => {
+//   if (animationFrameId) {
+//     cancelAnimationFrame(animationFrameId);
+//   }
+//   startTime = null;
+//   startValue = parseFloat(myBlur.getAttribute('stdDeviation')) || 0; // Get current blur level
+//   endValue = 0;
+//   animationFrameId = requestAnimationFrame(animateBlur);
+// });
 
 const ctx   = cvs.getContext('2d');
 const DPR   = window.devicePixelRatio || 1;

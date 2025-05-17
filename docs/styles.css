@@ -1,18 +1,34 @@
-#waves {
+/* #waves {
   display: block;
   width: 100vw;
   height: 60vh;
+} */
+
+.waves {
+  position: fixed; /* Makes it stick to the viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Places it behind other content */
+  pointer-events: none; /* Optional: so mouse clicks pass through */
 }
 
+html {
+  width: 100%;
+  height: 100%;
+}
 
 body {
+  width: 100%;
+  height: 100%;
   font-family: Inter, sans-serif;
   margin: 0;
-  height: 100%;
   background: #202020;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center;
+  justify-content: center; */
 }
 
 .main-card {
@@ -21,7 +37,6 @@ body {
   background-color: transparent;
   backdrop-filter: blur(4px);
   
-  margin-top: -250px;
   min-width: min-content;
   max-width: 650px;
   padding: 20px 20px; /* y, x */
@@ -55,4 +70,26 @@ body {
 
 .main-card__p--top {
   margin-left: 8px;
+}
+
+.container {
+  padding: 0px 15px;
+  flex: 1; /* Takes up remaining space */
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center;     /* Vertical centering */
+}
+
+.top-navigation {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 16px 0px;
+
+  color: rgb(230, 230, 230);
+  font-family: "Source Code Pro", monospace;
+  font-weight: 300;
+  font-size: 20px;
+
+  border-bottom: 2px solid #111;
 }
