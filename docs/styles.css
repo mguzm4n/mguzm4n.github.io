@@ -1,12 +1,58 @@
-canvas {
+#waves {
   display: block;
-  width: 100%;
-  height: 40vh;
+  width: 100vw;
+  height: 60vh;
 }
 
-html, body {
-  margin:0;
-  height:100%;
-  background:
-  #111;
+
+body {
+  font-family: Inter, sans-serif;
+  margin: 0;
+  height: 100%;
+  background: #202020;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-card {
+  position: relative;
+
+  background-color: transparent;
+  backdrop-filter: blur(4px);
+  
+  margin-top: -250px;
+  min-width: min-content;
+  max-width: 650px;
+  padding: 20px 20px; /* y, x */
+  padding-bottom: 20px;
+
+  color: white;
+  border-radius: 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 0 0 5px rgb(0 0 0 / 0.15);
+}
+
+.main-card__h1 {
+  margin-top: 12px;
+  margin-bottom: 42px;
+
+  line-height: 1.3ch;
+  color: rgb(230, 230, 230);
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 92px;
+}
+
+
+.main-card__p {
+  color: rgb(230, 230, 230);
+  font-family: "Source Code Pro", monospace;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.main-card__p--top {
+  margin-left: 8px;
 }

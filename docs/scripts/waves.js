@@ -1,20 +1,57 @@
-const cvs   = document.getElementById('wave');
+const cvs = document.getElementById('waves');
+const myBlur = document.getElementById('blur-effect'); 
+
+
+let animationFrameId = null;
+const duration = 2000; // Animation duration in milliseconds
+const maxBlur = 6; // The maximum stdDeviation value
+let startValue = 0;
+let endValue = 0;
+let startTime = null;
+
+function animateBlur(timestamp) {
+  if (!startTime) startTime = timestamp;
+  const elapsed = timestamp - startTime;
+  const progress = Math.min(elapsed / duration, 1);
+
+  const currentValue = startValue + (endValue - startValue) * progress;
+  myBlur.setAttribute('stdDeviation', currentValue);
+
+  cvs.style.filter = 'none'; // Temporarily remove
+  cvs.style.filter = 'url(#gaussian)'; // Re-apply
+
+  if (progress < 1) {
+    animationFrameId = requestAnimationFrame(animateBlur);
+  } else {
+    animationFrameId = null;
+  }
+}
+
+cvs.addEventListener('mouseenter', () => {
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+  }
+  startTime = null;
+  startValue = parseFloat(myBlur.getAttribute('stdDeviation')) || 0; // Get current blur level
+  endValue = maxBlur;
+  animationFrameId = requestAnimationFrame(animateBlur);
+});
+
+cvs.addEventListener('mouseleave', () => {
+  if (animationFrameId) {
+    cancelAnimationFrame(animationFrameId);
+  }
+  startTime = null;
+  startValue = parseFloat(myBlur.getAttribute('stdDeviation')) || 0; // Get current blur level
+  endValue = 0;
+  animationFrameId = requestAnimationFrame(animateBlur);
+});
+
 const ctx   = cvs.getContext('2d');
 const DPR   = window.devicePixelRatio || 1;
 
-let lineWidth = 1.5;
+let lineWidth = 3;
 let tempo = 0.035; // breathiness
-
-// const baseAmplitude = 110;
-// let amplitude = 140; // px
-// let freq = 1/50;
-// let lambda = -1 * 0.2;
-
-// let speed = 0.05;   // radians per frame
-// let stroke = 'hotpink';
-// let spreadX = 0.15; // [0, 1]
-
-
 
 function ampCustom(t) {
   return 140 + 40 * Math.sin(0.8 * t) + 30 * Math.sin(0.13 * t);
@@ -28,44 +65,6 @@ function noise1D(x) {
   return (1 - u) * rand(i) + u * rand(i + 1);
 }
 
-// let t = 0;
-// function render() {
-//   ctx.clearRect(0, 0, cvs.width, cvs.height);
-//   const midY = cvs.height / 2;
-//   const midX = cvs.width / 2;
-//   const breathe = spreadX * Math.cos(t); // bouncing factor
-//   // const breathe = spreadX * 0.08 * ampCustom(t); // bouncing factor
-
-//   // const amp = baseAmplitude * (1 + spread * Math.cos(t));
-//   // const amp = ampCustom(t) * 0.45;
-//   // const amp = noise1D(t)*30;
-
-//   ctx.beginPath();
-//   for (let xScreen = 0; xScreen <= cvs.width; xScreen++) {
-//     // map screen -> waves
-//     const xFromCenter = xScreen - midX;
-
-//     const p = 0.8; // 0 < p < 1 -> stretch anchors too
-//     const power = Math.pow(1 - Math.abs(xFromCenter) / midX, p);
-//     const localScale = 1 + breathe * power;
-//     const scaledX = xFromCenter / localScale; // fix
-
-//     const decay = Math.exp(lambda * Math.abs(freq * scaledX));
-//     const y = midY - decay * Math.cos(2 * Math.PI * freq * scaledX) * baseAmplitude;
-//     if (xScreen === 0) {
-//       ctx.moveTo(xScreen, y);
-//     } else {
-//       ctx.lineTo(xScreen, y);
-//     }
-//   }
-//   ctx.strokeStyle = stroke;
-//   ctx.stroke();
-
-//   t += tempo; 
-//   requestAnimationFrame(render);
-// }
-
-// render();
 
 class CanvasWave {
   lineWidth = 0;
@@ -121,11 +120,11 @@ class CanvasWave {
 
 const waves = [
   new CanvasWave({
-    lineWidth,
+    lineWidth: 1.5,
     strokeStyle: "hotpink",
     animationDirection: "x",
     spread: 0.05,
-    amplitude: 110,
+    amplitude: 200,
     freq: 1/45,
     p: 0.5,
     shapeFn(x) {
@@ -138,12 +137,12 @@ const waves = [
     },
   }),
   new CanvasWave({
-    lineWidth,
+    lineWidth: 3,
     strokeStyle: "lime",
     animationDirection: "y",
     spread: 0.15,
-    amplitude: 50,
-    freq: 1/100,
+    amplitude: 100,
+    freq: 1/200,
     p: 0.8,
     shapeFn(x) {
       const lambda = -0.55;
@@ -155,16 +154,15 @@ const waves = [
     },
   }),
   new CanvasWave({
-    lineWidth,
+    lineWidth: 1.5,
     strokeStyle: "white",
     animationDirection: "y",
-    spread: 0.18,
+    spread: 0.010,
     amplitude: 50,
     freq: 1/100,
-    p: 0.8,
     shapeFn(x) {
-      const lambda = -0.55;
-      const decay = 0.02*Math.exp(lambda * (1.5 - Math.abs(this.freq * x)));
+      const lambda = -0.65;
+      const decay = 0.015*Math.exp(lambda * (1 - Math.abs(this.freq * x)));
       return decay * Math.cos(2 * Math.PI * this.freq * x);
     },
     breatheFn(x) {
