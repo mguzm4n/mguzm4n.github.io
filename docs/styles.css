@@ -35,6 +35,8 @@ body {
   position: relative;
 
   background-color: transparent;
+
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   
   min-width: min-content;
