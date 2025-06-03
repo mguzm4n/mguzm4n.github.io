@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+  <script src="../scripts/waves.js" defer></script>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="style.css">
+  <title>mguzm4n's site</title>
+</head>
+<body>
+  <svg xmlns:svg="http://www.w3.org/2000/svg" style="display: none;">
+    <filter id="gaussian">
+      <feGaussianBlur id="blur-effect" stdDeviation="0" />
+    </filter>
+  </svg>
+  <canvas class="waves" id="waves"></canvas>
+  <div class="top-navigation">
+    <div>
+      <a class="top-navigation__a" href="/docs">
+        HOME
+      </a>
+    </div> 
+    - 
+    <div>CV</div> 
+    - 
+    <div class="active-link">PROJECTS</div>
+  </div>
+  <div class="container">
+    <div class="main-card">
+      <div>
+        Under construction... GitHub Links are missing! 
+      </div>
+
+      <div class="main-card__p">
+        This was my first full stack app where I used React in the frontend. There's a lot of good AND bad practices inside the code, since I developed the app while I was learning React (though I knew all the basic stuff). It started from a common scenenario every group of friends have lived: where to go to dinner? next place to have some drinks? which game to play this night? or even when there's a need for a general agreement over a discussed topic. With this app you create a poll, add some questions and options and share a link easily with your friends. Visualize answers as they arrive. Users get the poll's results on their emails! (this part was rough since gmail flags everything as spam!)
+        Stack: react (typescript), express, mongodb
+      </div>
+
+      <div class="main-card__p">
+        I wanted to learn Angular, but I had nothing in mind. A friend of mine, which is a doctor, wanted to publish medical courses in exchange of a pay. I designed this app where you can structure courses' contents, including a video. I gained a lot of knowledge here: streaming data --videos-- from cloud storage buckets, connect payment APIs and the Angular framework itself.
+        Stack: typescript, angular, express with zod validations and postgresql with kysely querybuilder+migration manager (100% typesafe!)
+      </div>
+      
+      <div class="main-card__p">
+        I used Twitter a lot when I was a teenager, so obviously I wanted to create a clone of that app (which sadly became "X"). Though it is not finished I learned a lot about the Go language as a backend programming language. I liked working with it..
+        Stack: react (typescript) and react query, golang with just the native http multiplexer! and postgresql.
+      </div>
+
+      <div class="main-card__p">
+        Besides that- you can look up many projects created with Java Springboot, which is a framework I used extensively during my stay in college and some basic side projects, alongside with Vue2/3 (never gets old). So... I can say I like Java too! Specifically, Springboot has everything you need to write resilient backends, and Vue always works, though I'd prefer Angular and React anytime.
+      </div>
+    </div>
+  </div>
+</body>
+</html>

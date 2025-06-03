@@ -1,0 +1,12 @@
+.main-card__p {
+  color: white;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.main-card {
+  margin: 12px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

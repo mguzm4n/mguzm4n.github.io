@@ -4,6 +4,23 @@
   height: 60vh;
 } */
 
+a {
+  all: unset;
+}
+
+.top-navigation__a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.top-navigation__a.active {
+  font-weight: 600;
+}
+
+.active-link {
+  font-weight: 600;
+}
+
 .waves {
   position: fixed; /* Makes it stick to the viewport */
   top: 0;
